@@ -1,11 +1,12 @@
 package com.mhwan.mask;
-
+import net.daum.mf.map.api.MapView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 
 public class MapActivity extends AppCompatActivity {
     // 카카오에서 쓰이는 키 해시값
@@ -24,6 +25,9 @@ public class MapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        MapView mapView = new MapView(this);
+        ViewGroup mapViewContainer = findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
         pc = new PermissionChecker(permission_list,this);
         pc.checkPermission();
     }
