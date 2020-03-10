@@ -1,4 +1,4 @@
-package com.mhwan.mask;
+package com.mhwan.mask.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,15 +7,23 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mhwan.mask.DoubleBackKeyPressed;
 import com.mhwan.mask.Fragment.InfoFragment;
 import com.mhwan.mask.Fragment.MapFragment;
 import com.mhwan.mask.Fragment.MaskFiveFragment;
+import com.mhwan.mask.PermissionChecker;
+import com.mhwan.mask.R;
+import com.mhwan.mask.SignetureUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +31,25 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private BottomNavigationView bottomNavigationView;
-    MenuItem prevMenuItem;
+    private MenuItem prevMenuItem;
+    private PermissionChecker pc;
+    private ViewGroup rootlayout;
+    private String[] permission_list = {
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+    };
+    private DoubleBackKeyPressed doubleBackKeyPressed;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
+        doubleBackKeyPressed = new DoubleBackKeyPressed(MainActivity.this, rootlayout);
     }
 
     private void initView(){
+        rootlayout = findViewById(R.id.root);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -82,6 +99,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupViewPager(viewPager);
+
+        pc = new PermissionChecker(permission_list,this);
+        pc.checkPermission();
+
+        Log.i("keyHash", SignetureUtil.getSigneture(getApplicationContext()));
     }
 
 
@@ -124,5 +146,18 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        pc.requestPermissionsResult(requestCode,grantResults);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackKeyPressed != null) {
+            doubleBackKeyPressed.onBackPressed();
+        } else
+            super.onBackPressed();
     }
 }

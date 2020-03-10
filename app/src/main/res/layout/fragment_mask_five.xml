@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Fragment.MaskFiveFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_marginTop="28dp"
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccentBlack"
+        android:text="마스크 5부제 계산기" />
 
-</FrameLayout>
+    <TextView
+        android:layout_marginTop="18dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="자신의 출생년도를 입력하여\n마스크 구매 가능 요일을 알아보세요."
+        android:textSize="17sp"
+        android:textColor="@color/colorAccentBlack"/>
+
+    <com.mhwan.mask.CustomUI.CustomEntryEdittext
+        android:layout_marginTop="24dp"
+        android:padding="16dp"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/custom_unique_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:entryCount="4">
+    </com.mhwan.mask.CustomUI.CustomEntryEdittext>
+
+    <TextView
+        android:id="@+id/result_text"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:textSize="19sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
