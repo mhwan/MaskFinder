@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_mask"
+        android:enabled="true"
+        android:icon="@drawable/ic_map_black_24dp"
+        android:title="마스크 찾기"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_five"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="마스크 5부제"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_info"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="도움말"
+        app:showAsAction="ifRoom" />
+</menu>
