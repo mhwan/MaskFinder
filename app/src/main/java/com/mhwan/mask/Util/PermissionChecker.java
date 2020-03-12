@@ -1,10 +1,18 @@
-package com.mhwan.mask;
+package com.mhwan.mask.Util;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.mhwan.mask.R;
 
 
 public class PermissionChecker {
@@ -35,11 +43,29 @@ public class PermissionChecker {
 
         for(String permission : permission_list){
             //권한 허용 여부를 확인한다.
-            int chk = activity.checkCallingOrSelfPermission(permission);
+            int chk = ContextCompat.checkSelfPermission(activity, permission);
 
-            if(chk == PackageManager.PERMISSION_DENIED){
+            if(chk != PackageManager.PERMISSION_GRANTED){
                 //권한 허용을여부를 확인하는 창을 띄운다
-                activity.requestPermissions(permission_list,0);
+                if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+                        permission)) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setMessage("위치정보 권한이 거부되었습니다. 앱에서 사용자의 현재 위치를 기반으로 마스크 정보를 가져오려면 설정에서 권한을 허용해주세요.");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    builder.create().show();
+                    // Show an explanation to the user *asynchronously* -- don't block
+                    // this thread waiting for the user's response! After the user
+                    // sees the explanation, try again to request the permission.
+                } else {
+                    activity.requestPermissions(permission_list, 0);
+                }
             }
         }
     }
@@ -57,9 +83,7 @@ public class PermissionChecker {
                     if(eventCallback!=null){
                         eventCallback.OnDenial();
                     }
-                    else{
-                        Toast.makeText(activity.getApplicationContext(),"저장소 접근 권한을 허용해주셔야 이용이 가능합니다.",Toast.LENGTH_LONG).show();
-                        activity.finish();
+                    else {
                     }
                     return;
                 }

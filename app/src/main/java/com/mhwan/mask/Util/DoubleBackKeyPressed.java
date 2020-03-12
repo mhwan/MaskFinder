@@ -1,9 +1,10 @@
-package com.mhwan.mask;
+package com.mhwan.mask.Util;
 
 import android.app.Activity;
 import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.mhwan.mask.R;
 import com.mhwan.mask.Util.AppUtility;
 
 public class DoubleBackKeyPressed {

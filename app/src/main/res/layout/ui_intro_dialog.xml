@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <LinearLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:paddingTop="42dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="24dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:id="@+id/bg_box"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_box" >
+
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginBottom="14dp"
+            android:textColor="@color/colorAccentBlack"
+            android:text="앱을 이용하시기 전에 읽어주세요!"/>
+
+        <TextView
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="@color/colorAccentGrey"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/text_one"/>
+        <TextView
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorAccentGrey"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/text_two"/>
+
+        <TextView
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorAccentGrey"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/text_three"/>
+
+        <TextView
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorAccentGrey"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/text_four"/>
+
+        <TextView
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorAccentGrey"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/text_five"/>
+
+        <TextView
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/colorAccentGrey"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/text_six"/>
+
+        <TextView
+            android:layout_marginTop="14dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/positive_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button_positive"
+            android:clickable="true"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="36dp"
+            android:paddingRight="36dp"
+            android:text="확인"
+            android:textColor="@color/colorWhite"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/img"
+        android:scaleType="fitCenter"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:srcCompat="@mipmap/ic_splash"/>
+</FrameLayout>

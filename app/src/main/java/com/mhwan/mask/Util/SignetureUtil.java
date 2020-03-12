@@ -1,4 +1,4 @@
-package com.mhwan.mask;
+package com.mhwan.mask.Util;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -23,7 +23,7 @@ public class SignetureUtil {
                 try {
                     MessageDigest md = MessageDigest.getInstance("SHA");
                     md.update(signature.toByteArray());
-                    return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
+                    return Base64.encodeToString(md.digest(), Base64.DEFAULT);
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }

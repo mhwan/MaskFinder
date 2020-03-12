@@ -5,10 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ViewGroup;
 
-import com.mhwan.mask.PermissionChecker;
+import com.mhwan.mask.Util.PermissionChecker;
 import com.mhwan.mask.R;
 
 public class MapActivity extends AppCompatActivity {

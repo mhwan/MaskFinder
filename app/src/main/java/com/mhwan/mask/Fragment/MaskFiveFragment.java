@@ -65,7 +65,7 @@ public class MaskFiveFragment extends Fragment implements CustomEntryEdittext.on
 
     @Override
     public void onNotFinished() {
-        result_text.setVisibility(View.GONE);
+        result_text.setVisibility(View.INVISIBLE);
         Toast.makeText(getContext(), AppContext.getContext().getString(R.string.invalid_birth_input), Toast.LENGTH_SHORT).show();
     }
 }

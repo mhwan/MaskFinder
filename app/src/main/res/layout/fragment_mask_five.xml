@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="자신의 출생년도를 입력하여\n마스크 구매 가능 요일을 알아보세요."
         android:textSize="17sp"
-        android:textColor="@color/colorAccentBlack"/>
+        android:textColor="@color/colorAccentGrey"/>
 
     <com.mhwan.mask.CustomUI.CustomEntryEdittext
         android:layout_marginTop="24dp"
@@ -41,10 +41,55 @@
     <TextView
         android:id="@+id/result_text"
         android:gravity="center_horizontal"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:textSize="19sp"
         android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_marginTop="34dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                android:text="마스크 구매시 아래 내용을 참고하세요!"
+                android:textColor="@color/colorAccentBlack" />
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="4dp"
+                android:textSize="13sp"
+                android:text="@string/mask_five_info"
+                android:textColor="@color/colorAccentGrey" />
+
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="13sp"
+                android:text="@string/mask_five_instead_info"
+                android:textColor="@color/colorAccentGrey" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 </LinearLayout>

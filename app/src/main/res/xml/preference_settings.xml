@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.mhwan.mask.CustomUI.CustomPreferenceCategory
+        android:title="마스크 검색">
+
+        <com.mhwan.mask.CustomUI.CustomPreferenceSeekbar
+            android:title="마스크 검색 반경"
+            android:summary="마스크 검색 반경은 500m입니다.">
+        </com.mhwan.mask.CustomUI.CustomPreferenceSeekbar>
+    </com.mhwan.mask.CustomUI.CustomPreferenceCategory>
+    <com.mhwan.mask.CustomUI.CustomPreferenceCategory
+        android:title="어플리케이션">
+        <com.mhwan.mask.CustomUI.CustomPreference
+            android:title="앱 버전"
+            android:key="key_app_ver"
+            android:summary="1.0.0">
+        </com.mhwan.mask.CustomUI.CustomPreference>
+        <com.mhwan.mask.CustomUI.CustomPreference
+            android:title="개발자에게"
+            android:key="key_mail_to_developer"
+            android:summary="개발자에게 앱과 관련해 메일을 보냅니다.">
+        </com.mhwan.mask.CustomUI.CustomPreference>
+        <com.mhwan.mask.CustomUI.CustomPreference
+            android:title="앱 공유"
+            android:key="key_share_friends"
+            android:summary="친구들에게 이 앱을 소개시켜줍니다.">
+        </com.mhwan.mask.CustomUI.CustomPreference>
+    </com.mhwan.mask.CustomUI.CustomPreferenceCategory>
+</PreferenceScreen>

@@ -169,7 +169,7 @@ public class CustomEntryEdittext extends LinearLayout {
         editext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                    if (currentIndex == entryCount - 1 && getEnteredText().length() == entryCount) {
+                    if (getEnteredText().length() == entryCount) {
                         mListerner.onFinish(getEnteredText());
                     } else if (getEnteredText().length() < entryCount)
                         mListerner.onNotFinished();

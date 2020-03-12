@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">마스크파인더</string>
+    <string name="app_name">마스크 파인더</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -10,6 +10,25 @@
     <string name="thursday">목요일</string>
     <string name="friday">금요일</string>
     <string name="mask_day_result_format">당신의 마스크 구매일은 %1$s입니다!</string>
+    <string name="mask_search_range_format">마스크 검색 반경은 %1$skm입니다</string>
     <string name="invalid_birth_input">출생년도 4자리를 정확히 입력해주세요!</string>
     <string name="cancel_mask_finding">마스크 주변 정보 탐색이 취소되었습니다.</string>
+    <string name="message_cannot_access_denied">위치정보 권한이 거부되어 현위치를 탐색할 수 없습니다. 권한 허용 후 다시 시도해주세요.</string>
+    <string name="message_no_data_mask">위치정보가 없어 마스크 정보를 가져올 수 없습니다.</string>
+    <string name="message_fail_get_data">서버로부터 데이터를 받아오는데 실패했습니다.</string>
+    <string name="message_no_network">네트워크 연결 상태를 확인 후 앱을 다시 실행해주세요.</string>
+    <string name="message_no_sale_mask">마스크 판매 정보가 없습니다.</string>
+    <string name="pharmacy">약국</string>
+    <string name="text_one">1. 이 앱은 건강보험심사평가원 제공하는 데이터를 바탕으로 마스크 판매 정보를 받아옵니다.</string>
+    <string name="text_two">2. 재고 현황 정보는 데이터 처리 및 전송으로 인해 실제 판매처의 현황과 5분~10분 정도의 차이가 있으니, 참고용으로 사용해주시면 감사하겠습니다.</string>
+    <string name="text_three">3. 일부 약국에서는 번호표 배부 후 판매하는 약국도 있어 서비스되는 정보가 번호표 배부 현황을 반영하지는 못하고 있음을 참고해주세요.</string>
+    <string name="text_four">4. 마스크 현황 정보는 성인 마스크를 대상으로 합니다.</string>
+    <string name="text_five">5. 현재 어려운 환경에도 불구하고 많은 공헌을 해주신 의료진, 약사님 등 일선에 계신 많은 분들께 감사 인사 드리며, 응원합니다!</string>
+    <string name="text_six">6. 이 앱은 현 사태에 조금이라도 도움이 되고싶어 개발자 한명이 개발했습니다. 일부 불안정한 기능이 있어도 양해부탁드리며, 발견시 최대한 빨리 조치하겠습니다.</string>
+    <string name="postoffice">우체국</string>
+    <string name="nonghyup">농협</string>
+    <string name="google_sdk_api_key">AIzaSyCh5Ki-rU1vxVVp7huWRdtISqX7_90AWCo</string>
+    <string name="mask_five_info">* 마스크는 주 1인당 2매 구매가능하며, 1매당 1500원입니다.\n*지정된 요일에 구매하지 못한경우 주말에 구매 가능합니다.\n*구매시 주민등록증 등 공인신분증을 지참해주세요.</string>
+    <string name="permission_denied_message">위치정보 접근 권한이 거부되어 현위치 근처에 마스크를 검색할 수 없습니다. 직접 장소를 검색해 이용하세요.</string>
+    <string name="mask_five_instead_info">*대리구매는 만 10세 이하 어린이(2010년 포함 이후 출생),\n만 80세 이상 어르신(1940년 포함 그 이전 출생한 어르신),\n장애인, 장기요양급여 수급자는 증명서류 지참시 가능합니다.\n\n*대리구매시 증명서류로 본인 신분증, 주민등록등본,\n복지카드 또는 장애인등록증, 장기요양인정서가 필요합니다.</string>
 </resources>

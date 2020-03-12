@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    style="@style/CustomBasePreference">
+
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="fasdfs"
+        android:layout_marginBottom="3dp"
+        android:textColor="@color/colorAccentBlack"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="match_parent"
+        android:text="asdfasd"
+        android:textColor="@color/colorAccentGrey"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="5dp"
+            android:max="10"
+            android:progress="2"
+            android:min="1"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

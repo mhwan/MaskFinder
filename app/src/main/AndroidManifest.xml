@@ -2,16 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mhwan.mask">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <!-- key value for Mhwan
-    <meta-data android:name="com.kakao.sdk.AppKey" android:value="c2d6f8772b5c1c3499b1f96394c34296"/> -->
-
-    <!-- key value for hs -->
-    <meta-data android:name="com.kakao.sdk.AppKey" android:value="c8c368fe3e5399609e355d4f0777fe4c"/>
-
     <application
         android:name=".Util.AppContext"
         android:allowBackup="true"
@@ -19,17 +9,29 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Activity.MainActivity">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.SettingActivity"></activity>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.MapActivity" />
 
-        <activity android:name=".Activity.MapActivity"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="786ebcc5bdafca645c80c2548f3cdf6e" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.mhwan.mask.R;
+import com.mhwan.mask.Util.AppContext;
 import com.mhwan.mask.Util.AppUtility;
 
 
@@ -53,6 +57,14 @@ public class InfoFragment extends Fragment {
             Log.d("check URL",url);
             view.loadUrl(url);
             return true;
+        }
+
+
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+            Toast.makeText(AppContext.getContext(), AppContext.getContext().getString(R.string.message_no_network), Toast.LENGTH_SHORT).show();
+
         }
     }
 
