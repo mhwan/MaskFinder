@@ -27,7 +27,7 @@
     <string name="text_six">6. 이 앱은 현 사태에 조금이라도 도움이 되고싶어 개발자 한명이 개발했습니다. 일부 불안정한 기능이 있어도 양해부탁드리며, 발견시 최대한 빨리 조치하겠습니다.</string>
     <string name="postoffice">우체국</string>
     <string name="nonghyup">농협</string>
-    <string name="google_sdk_api_key">AIzaSyCh5Ki-rU1vxVVp7huWRdtISqX7_90AWCo</string>
+    <string name="google_sdk_api_key">%%%%%%%%%%</string>
     <string name="mask_five_info">* 마스크는 주 1인당 2매 구매가능하며, 1매당 1500원입니다.\n*지정된 요일에 구매하지 못한경우 주말에 구매 가능합니다.\n*구매시 주민등록증 등 공인신분증을 지참해주세요.</string>
     <string name="permission_denied_message">위치정보 접근 권한이 거부되어 현위치 근처에 마스크를 검색할 수 없습니다. 직접 장소를 검색해 이용하세요.</string>
     <string name="mask_five_instead_info">*대리구매는 만 10세 이하 어린이(2010년 포함 이후 출생),\n만 80세 이상 어르신(1940년 포함 그 이전 출생한 어르신),\n장애인, 장기요양급여 수급자는 증명서류 지참시 가능합니다.\n\n*대리구매시 증명서류로 본인 신분증, 주민등록등본,\n복지카드 또는 장애인등록증, 장기요양인정서가 필요합니다.</string>

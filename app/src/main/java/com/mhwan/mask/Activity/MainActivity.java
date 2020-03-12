@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements PermissioEventCal
         pc = new PermissionChecker(permission_list,this, this);
         pc.checkPermission();
 
-        Log.i("keyHash", SignetureUtil.getSigneture(getApplicationContext()));
+        //Log.i("keyHash", SignetureUtil.getSigneture(getApplicationContext()));
     }
 
     private List initFragment(){
