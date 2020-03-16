@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -29,7 +28,9 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.mhwan.mask.Activity.ListActivity;
 import com.mhwan.mask.Activity.MainActivity;
+import com.mhwan.mask.BuildConfig;
 import com.mhwan.mask.Item.MaskStoreItem;
 import com.mhwan.mask.Item.Store;
 import com.mhwan.mask.R;
@@ -46,6 +47,7 @@ import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +66,7 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
     private View view;
     //private EditText search_places;
     private MapView mapView;
+    private ViewGroup mapViewContainer;
     private List<Store> storeList;
     private ViewPager viewPager;
     private TextView noDataText;
@@ -72,7 +75,9 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
     private StorePagerAdapter pagerAdapter;
     private MyPreference preference;
     private AutocompleteSupportFragment autocompleteFragment;
-    private static final int GPS_ENABLE_REQUEST_CODE = 1102;
+    //private static final int GPS_ENABLE_REQUEST_CODE = 1102;
+    private double latitude = -1;
+    private double longitude = -1;
 
     public MapFragment() {
         // Required empty public constructor
@@ -88,25 +93,32 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
         return view;
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
     private void initView() {
         preference = new MyPreference(getContext());
         ((MainActivity) getActivity()).setListener(new GetMaskListener() {
             @Override
             public void onDataUpdate() {
-                updateLocation();
+                updateInfoByNowLocation();
             }
         });
 
 
         typeArray = getResources().getStringArray(R.array.store_type_array);
+
         mapView = new MapView(getActivity());
-        ViewGroup mapViewContainer = view.findViewById(R.id.map_view);
+        mapViewContainer = view.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
         setupAutoCompleteFragment();
 
         view.findViewById(R.id.fab_map).setOnClickListener(this::onClick);
         view.findViewById(R.id.fab_now_location).setOnClickListener(this::onClick);
+        view.findViewById(R.id.fab_list).setOnClickListener(this::onClick);
         noDataText = (TextView) view.findViewById(R.id.info_nodata);
         viewPager = view.findViewById(R.id.info_viewpager);
         pagerAdapter = new StorePagerAdapter(getActivity());
@@ -139,7 +151,7 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
     private void setupAutoCompleteFragment() {
         // Initialize the SDK
         if (!Places.isInitialized())
-            Places.initialize(getActivity().getApplicationContext(), AppContext.getContext().getString(R.string.google_sdk_api_key));
+            Places.initialize(getActivity().getApplicationContext(), BuildConfig.API_KEY);
 
 // Create a new Places client instance
         PlacesClient placesClient = Places.createClient(AppContext.getContext());
@@ -223,15 +235,41 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
         });*/
     }
 
+    private ArrayList<Store> getFilterdStoreList(List<Store> storesList) {
+        ArrayList<Store> newList = new ArrayList<>();
+        newList.addAll(storesList);
+        for (Store s : newList) {
+            if (s.getLng() == null || s.getLat() == null) {
+                if (s.getAddr() != null) {
+                    LatLng latLng = AppUtility.getAppinstance().getLocationFromAddress(s.getAddr());
+                    s.setLat(latLng.latitude);
+                    s.setLng(latLng.longitude);
+                    s.setDistanceMeters(AppUtility.getAppinstance().getDistanceFromLocation((float) latitude, (float) longitude, (float) latLng.latitude, (float) latLng.longitude));
+                } else {
+                    s.setDistanceMeters(AppUtility.NO_DISTANCE_ERR_WITH_NO_LOCATION);
+                    s.setLat(this.latitude);
+                    s.setLng(this.longitude);
+                }
+            } else
+                s.setDistanceMeters(AppUtility.getAppinstance().getDistanceFromLocation((float) latitude, (float) longitude, s.getLat().floatValue(), s.getLng().floatValue()));
+
+            s.setRemainValue(AppUtility.getAppinstance().getOrderRemainStat(s.getRemainStat()));
+        }
+
+        Collections.sort(newList);
+        return newList;
+    }
+
     private void addPinToMap(MaskStoreItem maskStoreItem) {
         if (maskStoreItem != null) {
+            if (storeList != null)
+                storeList.clear();
+
             if (maskStoreItem.getCount() > 0) {
-                if (storeList != null)
-                    storeList.clear();
                 if (mapView.getPOIItems().length > 0)
                     mapView.removeAllPOIItems();
 
-                storeList = maskStoreItem.getStores();
+                storeList = getFilterdStoreList(maskStoreItem.getStores());
                 pagerAdapter.resetList(storeList);
                 MapPOIItem[] poiItems = new MapPOIItem[storeList.size()];
                 for (int i = 0; i < storeList.size(); i++) {
@@ -311,7 +349,7 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
     protected void showAlertbox() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("위치서비스 비활성화");
-        builder.setMessage("현위치를 탐색하기 위해서 위치서비스가 필요합니다. 위치 설정을 켜시고 다시 시도해주세요.");
+        builder.setMessage("현위치를 탐색하기 위해서 위치서비스가 필요합니다. 위치 설정을 켜시고 다시 현위치를 탐색해주세요.");
         builder.setCancelable(true);
         builder.setPositiveButton("설정", new DialogInterface.OnClickListener() {
             @Override
@@ -340,7 +378,20 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, uri);
                 startActivity(intent);
                 break;
+            case R.id.fab_list:
+                Intent intent1 = new Intent(getActivity(), ListActivity.class);
+                if (storeList != null)
+                    intent1.putExtra(ListActivity.STORE_EXTRA, new ArrayList<>(storeList));
+                startActivity(intent1);
+                break;
         }
+    }
+
+    private void updateInfoByNowLocation() {
+        if (longitude > 0 && latitude > 0) {
+            setLocationWork(latitude, longitude);
+        } else
+            updateLocation();
     }
 
     private void updateLocation() {
@@ -365,7 +416,7 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
         }
     }
 
-    private void changeViewVisible(boolean isVisible, String m){
+    private void changeViewVisible(boolean isVisible, String m) {
         if (isVisible) {
             noDataText.setVisibility(View.GONE);
             viewPager.setVisibility(View.VISIBLE);
@@ -375,7 +426,11 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
             viewPager.setVisibility(View.GONE);
         }
     }
+
     private void setLocationWork(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        Log.i("location", this.latitude + ", " + this.longitude);
         getMaskInfoFromGeo(latitude, longitude);
         changeMapCenterZoom(latitude, longitude);
         setAddressText(AppUtility.getAppinstance().getAddress(latitude, longitude));
@@ -455,6 +510,7 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
             TextView count = view.findViewById(R.id.info_count);
             TextView last = view.findViewById(R.id.info_lastStock);
             TextView update = view.findViewById(R.id.info_update);
+            TextView distance = view.findViewById(R.id.info_distance);
 
             name.setText(lists.get(position).getName());
             type.setText(typeArray[Integer.parseInt(lists.get(position).getType()) - 1]);
@@ -477,16 +533,26 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
                     count.setBackgroundResource(R.drawable.bg_outerbox_grey);
                     count.setTextColor(ContextCompat.getColor(context, R.color.colorAccentLightGrey));
                     count.setText("재고 없음");
+                } else if (s.equals("break")) {
+                    count.setBackgroundResource(R.drawable.bg_outerbox_grey);
+                    count.setTextColor(ContextCompat.getColor(context, R.color.colorAccentLightGrey));
+                    count.setText("판매 중지");
                 }
             } else {
                 count.setBackgroundResource(R.drawable.bg_outerbox_grey);
                 count.setTextColor(ContextCompat.getColor(context, R.color.colorAccentLightGrey));
                 count.setText("정보 없음");
             }
-            String l = (lists.get(position).getStockAt() == null)? "정보없음" : lists.get(position).getStockAt();
-            last.setText("최근 입고 : "+l);
-            String u = (lists.get(position).getCreatedAt() == null)? "정보없음" : lists.get(position).getCreatedAt();
-            update.setText("정보 업데이트 : "+u);
+            String l = (lists.get(position).getStockAt() == null) ? "정보없음" : lists.get(position).getStockAt();
+            last.setText("최근 입고 : " + l);
+            String u = (lists.get(position).getCreatedAt() == null) ? "정보없음" : lists.get(position).getCreatedAt();
+            update.setText("정보 업데이트 : " + u);
+            if (lists.get(position).getDistanceMeters() == AppUtility.NO_DISTANCE_ERR)
+                distance.setText("거리를 알수없음");
+            else if (lists.get(position).getDistanceMeters() == AppUtility.NO_DISTANCE_ERR_WITH_NO_LOCATION)
+                distance.setText("위치를 알수없음(핀이 정확하지않습니다)");
+            else
+                distance.setText(AppUtility.getAppinstance().getDistanceString(lists.get(position).getDistanceMeters()));
 
             container.addView(view);
             return view;

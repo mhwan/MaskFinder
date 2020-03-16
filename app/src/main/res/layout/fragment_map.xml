@@ -45,11 +45,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="142dp"
+            android:layout_marginBottom="152dp"
             android:layout_marginLeft="16dp"
             app:backgroundTint="@color/colorWhite"
             android:tint="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_my_location_black_24dp"
+            tools:ignore="VectorDrawableCompat" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_above="@id/fab_now_location"
+            app:backgroundTint="@color/colorWhite"
+            app:fabSize="normal"
+            android:tint="@color/colorPrimaryDark"
+            app:srcCompat="@drawable/ic_format_list_bulleted_black_24dp"
             tools:ignore="VectorDrawableCompat" />
     </RelativeLayout>
 

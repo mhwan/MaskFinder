@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.mhwan.mask.CustomUI.CustomEntryEdittext;
 import com.mhwan.mask.R;
 import com.mhwan.mask.Util.AppContext;
 import com.mhwan.mask.Util.AppUtility;
+import com.mhwan.mask.Util.SignetureUtil;
 
 /**
  * A simple {@link Fragment} subclass.

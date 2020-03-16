@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.ListActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/toolbar_close"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="center_vertical|left"
+            android:scaleType="fitXY"
+            android:background="?selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:tint="@color/colorWhite"
+            app:srcCompat="@drawable/ic_close_black_24dp"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="목록으로 보기"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="24dp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:background="@color/colorPrimarybg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/message_auto_filter"
+        android:textSize="12sp"
+        android:textColor="@color/colorAccentLightGrey"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/auto_filter_info_text"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:text="@string/message_no_data_list"
+        android:textColor="@color/colorAccentLightGrey"
+        android:id="@+id/empty_textview"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
