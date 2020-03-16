@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -56,6 +57,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -78,6 +80,7 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
     //private static final int GPS_ENABLE_REQUEST_CODE = 1102;
     private double latitude = -1;
     private double longitude = -1;
+    public static final int LIST_REQUEST_CODE = 0x167;
 
     public MapFragment() {
         // Required empty public constructor
@@ -382,7 +385,7 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
                 Intent intent1 = new Intent(getActivity(), ListActivity.class);
                 if (storeList != null)
                     intent1.putExtra(ListActivity.STORE_EXTRA, new ArrayList<>(storeList));
-                startActivity(intent1);
+                startActivityForResult(intent1, LIST_REQUEST_CODE);
                 break;
         }
     }
@@ -445,6 +448,23 @@ public class MapFragment extends Fragment implements MapView.OpenAPIKeyAuthentic
         autocompleteFragment.setText(address);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LIST_REQUEST_CODE && resultCode == RESULT_OK && data != null){
+            int i = data.getIntExtra(ListActivity.RESULT_ITEM_POSITION_EXTRA, -1);
+
+            if (i >= 0) {
+                selection = i;
+                viewPager.setCurrentItem(selection, true);
+                MapPOIItem[] poiItem = mapView.getPOIItems();
+                if (poiItem != null && poiItem.length > 0) {
+                    mapView.selectPOIItem(poiItem[selection], true);
+                    mapView.setMapCenterPoint(poiItem[selection].getMapPoint(), true);
+                }
+            }
+        }
+    }
 
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) AppContext.getContext().getSystemService(LOCATION_SERVICE);

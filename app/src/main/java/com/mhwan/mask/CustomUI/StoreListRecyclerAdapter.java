@@ -13,15 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mhwan.mask.Item.Store;
 import com.mhwan.mask.R;
 import com.mhwan.mask.Util.AppUtility;
+import com.mhwan.mask.Util.ItemClickListener;
 
 import java.util.ArrayList;
 
 public class StoreListRecyclerAdapter extends RecyclerView.Adapter<StoreListRecyclerAdapter.Viewholder> {
     private Context context;
     private ArrayList<Store> storeList;
-    public StoreListRecyclerAdapter(Context context, ArrayList storelist) {
+    private ItemClickListener listener;
+    public StoreListRecyclerAdapter(Context context, ArrayList storelist, ItemClickListener listener) {
         this.context = context;
         this.storeList = storelist;
+        this.listener = listener;
     }
     @NonNull
     @Override
@@ -79,17 +82,24 @@ public class StoreListRecyclerAdapter extends RecyclerView.Adapter<StoreListRecy
         return storeList.size();
     }
 
-    public class Viewholder extends RecyclerView.ViewHolder {
+    public class Viewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name, address, distance, update, lastStock, count;
+        ViewGroup frame;
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-
+            frame = itemView.findViewById(R.id.frame);
+            frame.setOnClickListener(this::onClick);
             name = (TextView) itemView.findViewById(R.id.list_info_name);
             address = (TextView) itemView.findViewById(R.id.list_info_address);
             distance = (TextView) itemView.findViewById(R.id.list_info_distance);
             update = (TextView) itemView.findViewById(R.id.list_info_update);
             lastStock = (TextView) itemView.findViewById(R.id.list_info_lastStock);
             count = (TextView) itemView.findViewById(R.id.list_info_count);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.OnItemClickListener(v, getAdapterPosition());
         }
     }
 }
